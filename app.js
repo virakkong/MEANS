@@ -16,16 +16,16 @@ app.get('/', function(req,res){
    console.log("Get the hompage");
     //send back
    res 
-       .status(404)
+       .status(200)
         //send text
-       .send('Express yourself');
+       .sendFile(path.join(__dirname,'public','index.html'));
 });
 
 app.get('/json', function(req,res){
    console.log("Get the json");
     //send back
    res 
-       .status(405)
+       .status(200)
        .json( {'jsonData': true} );
 });
 
@@ -34,7 +34,7 @@ app.get('/file', function(req,res){
    console.log("Get the File");
     //send back
    res 
-       .status(406)
+       .status(200)
         //pass the path by finding the path using join
         //__dirname is standard node variable
        .sendFile(path.join(__dirname,'app.js'));
