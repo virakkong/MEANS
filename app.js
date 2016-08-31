@@ -8,3 +8,9 @@ talk.intro();
 
 ///function with parameter
 talk.hello('virak');
+
+
+//call function name in a module
+var question = require('./talk/question');
+var answer = question.ask('what is your Name?');
+console.log(answer);
