@@ -4,22 +4,15 @@ var app = express();
 var path = require('path');
 //set port 5000
 app.set('port', 8080);
-//it run asynchronously
-//listen to port 8080
-//app.listen(8080);
-//If want to stop listen to port:
-    //1. ps -ax | grep node
-    //2. kill -9 PID
 
-//set route for express
-app.get('/', function(req,res){
-   console.log("Get the hompage");
-    //send back
-   res 
-       .status(200)
-        //send text
-       .sendFile(path.join(__dirname,'public','index.html'));
-});
+//express will check to see if any static file in public and direct the file to public
+
+///Technique 1: http://localhost:3000/index.html
+//app.use(express.static(path.join(__dirname, 'public')));
+
+///Technique 2: http://localhost:3000/public/index.html
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 
 app.get('/json', function(req,res){
    console.log("Get the json");
