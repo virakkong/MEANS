@@ -8,7 +8,7 @@
 //console.log("App continue");
 
 
-//2. Asynchronous
+//2. Asynchronous (Good to work with database)
 
 var fs = require('fs');
 console.log("Going to get a file");

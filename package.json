@@ -1,0 +1,25 @@
+{
+  "name": "means-app",
+  "version": "1.0.0",
+  "description": "Mean Stack Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/virakkong/MEANS.git"
+  },
+  "keywords": [
+    "means"
+  ],
+  "author": "Full Stack Training",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/virakkong/MEANS/issues"
+  },
+  "homepage": "https://github.com/virakkong/MEANS#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
