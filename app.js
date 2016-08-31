@@ -3,12 +3,17 @@ var express = require('express');
 var app = express();
 //set port 5000
 app.set('port', 8888);
-
+//it run asynchronously
 //listen to port 8888
 //app.listen(8888);
-app.listen(app.get('port'), function() {
-    
-    console.log("listen to port: " + app.get('port'));
+//If want to stop listen to port:
+    //1. ps -ax | grep node
+    //2. kill -9 PID
+
+var server = app.listen(app.get('port'), function() {
+    var port = server.address().port;
+    //console.log("listen to port: " + app.get('port'));
+    console.log("listen to port: " + port;
 });
 
 
