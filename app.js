@@ -5,6 +5,12 @@ var path = require('path');
 //set port 5000
 app.set('port', 8080);
 
+app.use(function(req,res,next) {
+    console.log(req.method, req.url);
+    next();
+});
+
+
 //express will check to see if any static file in public and direct the file to public
 
 ///Technique 1: http://localhost:3000/index.html
