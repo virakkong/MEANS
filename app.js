@@ -1,6 +1,7 @@
 //initialize express
 var express = require('express');
 var app = express();
+var path = require('path');
 //set port 5000
 app.set('port', 8080);
 //it run asynchronously
@@ -26,6 +27,17 @@ app.get('/json', function(req,res){
    res 
        .status(405)
        .json( {'jsonData': true} );
+});
+
+//when we request /file it will reload to app.js (result is in html only, not the result)
+app.get('/file', function(req,res){
+   console.log("Get the File");
+    //send back
+   res 
+       .status(406)
+        //pass the path by finding the path using join
+        //__dirname is standard node variable
+       .sendFile(path.join(__dirname,'app.js'));
 });
 
 var server = app.listen(app.get('port'), function() {
