@@ -21,4 +21,11 @@ router
     //call controller to use
     .get(CtrlHotels.hotelsGetOne);  //add new controller
 
+//route 
+router 
+    .route('/hotels/new')  //localhost:8080/api/hotels/new/
+
+    //post
+    .post(CtrlHotels.hotelsAddOne);
+
 module.exports = router;

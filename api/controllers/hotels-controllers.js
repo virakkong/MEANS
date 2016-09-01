@@ -40,3 +40,12 @@ module.exports.hotelsGetOne = function(req, res) {
       .status(200)
       .json(thisHotel);
 };
+
+module.exports.hotelsAddOne =function(req,res) {
+  console.log("Post new Hotel");
+  //pass all data of posted form
+  console.log(req.body);
+    res 
+       .status(200)
+       .json(req.body);
+};
