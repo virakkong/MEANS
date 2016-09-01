@@ -3,9 +3,10 @@ var express = require('express');
 var app = express();
 var path = require('path');
 //#1
-var routes =require('./routes'); //  represents /json-->see index.js
+//api/routes
+var routes =require('./api/routes'); //  localhost:8080/api/routes
 
-//set port 5000
+//set port 8080
 app.set('port', 8080);
 
 
@@ -18,8 +19,9 @@ app.use(function(req,res,next) {
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-//#2 :localhost:8080/api/json
-app.use('/api', routes);
+//#2 : specify middle folder bettween root and ./api/routes/index.js
+//after route successfully to the index.js, the index.js will call the controller hotel-controllers.js
+app.use('/api', routes); // /api will represents api/routes
 
 
 var server = app.listen(app.get('port'), function() {
