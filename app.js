@@ -1,3 +1,6 @@
+//open connection to database
+require('./api/data/dbconnection.js').open();
+
 //initialize express
 var express = require('express');
 var app = express();
