@@ -71,11 +71,30 @@ module.exports.hotelsGetOne = function(req, res) {
     
 };
 
+
+//add new hotel to database-->use in form
 module.exports.hotelsAddOne =function(req,res) {
-  console.log("Post new Hotel");
-  //pass all data of posted form
-  console.log(req.body);
-    res 
-       .status(200)
-       .json(req.body);
+//get collection 
+    var db = dbconn.get();
+    var collection =db.collection('hotels');
+    var newHotel;
+    if(req.body && req.body.name && req.body.stars){
+        
+         newHotel = req.body;
+         newHotel.stars = parseInt(req.body.stars,10); //convert string into integer number
+          console.log("Post new Hotel");
+          //pass all data of posted form back to database
+          console.log(newHotel);
+            res 
+               .status(200)
+               .json(newHotel);
+    } else {
+        
+        console.log('Data is missing from the body');
+        res
+            .status(400)
+            .json({message: "Required data missing from body"}); //message is keyword
+    }
+    
+    //post: http://localhost:8080/api/hotels/new
 };
