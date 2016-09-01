@@ -1,8 +1,19 @@
+//conect the controller to database directly
+//create reusable connection in app.js
+//get connection when we need it
+var dbconn =require('../data/dbconnection.js');
+
 //link to json data
 var hotelData = require('../data/hotel-data.json');
 
 module.exports.hotelsGetAll = function(req, res) {
-   console.log("Get the hotel");
+    
+    var db = dbconn.get();
+    console.log('The database: ', db); //The database:  Db {
+    
+    
+    console.log("GET the hotel");
+    
      //set offset and count
             var offset = 0;
             var count = 5;
