@@ -17,6 +17,7 @@ router
 router
     //define parameter
     .route('/hotels/:hotelId')   //localhost:8080/api/hotels/<hotelId>
+    //Ex: http://localhost:8080/api/hotels/57c87f9dc31a70b8f8ea0394
 
     //call controller to use
     .get(CtrlHotels.hotelsGetOne);  //add new controller
