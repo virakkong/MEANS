@@ -17,6 +17,7 @@ app.use(function(req,res,next) {
     next();
 });
 
+//test 
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 //make sure the middle ware run between static and api
