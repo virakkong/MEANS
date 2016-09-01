@@ -64,7 +64,7 @@ module.exports.hotelsGetOne = function(req, res) {
         
         res
             .status(200)
-            .json(doc); //we get only one id
+            .json(doc); //we get only one id we need 
           
       });
     
@@ -82,12 +82,17 @@ module.exports.hotelsAddOne =function(req,res) {
         
          newHotel = req.body;
          newHotel.stars = parseInt(req.body.stars,10); //convert string into integer number
-          console.log("Post new Hotel");
+        
+        console.log(newHotel);
           //pass all data of posted form back to database
-          console.log(newHotel);
-            res 
-               .status(200)
-               .json(newHotel);
+        collection.insertOne(newHotel, function(err, response) {
+              console.log(response.ops);
+              res
+                .status (201) //the correct status of new resource created is 201, not 200
+                //to post a response object ==> use .ops
+                .json (response.ops);
+          });
+          
     } else {
         
         console.log('Data is missing from the body');
