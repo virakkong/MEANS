@@ -1,5 +1,6 @@
 //mongoose db
 require('./api/data/db.js');
+
 //open connection to database
 require('./api/data/dbconnection.js').open();
 
@@ -28,7 +29,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 //make sure the middle ware run between static and api
 //we want it run before api, aka route
 
-app.use(bodyParser.urlencoded({extened: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 //set to false mean we need only string and array for our body for post form
 //set to true-->access all data type
 
