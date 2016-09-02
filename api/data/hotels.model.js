@@ -51,9 +51,20 @@ var hotelSchema = new mongoose.Schema({
     photos: [String],
     currency: String,
     reviews: [reviewSchema],
-    rooms:[roomSchema]
+    rooms:[roomSchema],
+    location: {
+        address: String,
+        //always store longitude(E/W) and latitude (N/S)
+        //coordinates: [Number]
+        coordinates: {
+            type: [Number],
+            index: '2dsphere'
+        }
+    }
     
 });
 
 mongoose.model('Hotel', hotelSchema, 'hotels');
 //hotels is optional. it will created at execute if not input it.
+
+

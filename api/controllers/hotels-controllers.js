@@ -1,18 +1,23 @@
+//Native Driver
 //conect the controller to database directly
 //create reusable connection in app.js
 //get connection when we need it
-var dbconn =require('../data/dbconnection.js');
+//var dbconn =require('../data/dbconnection.js');
+//
+//// we need this driver in order to retrive all data related to an id, instead of just one id
+//var ObjectId = require('mongodb').ObjectId;
+////link to json data
+//var hotelData = require('../data/hotel-data.json');
 
-// we need this driver in order to retrive all data related to an id, instead of just one id
-var ObjectId = require('mongodb').ObjectId;
-//link to json data
-var hotelData = require('../data/hotel-data.json');
+var mongoose = require('mongoose');
+var Hotel = mongoose.model('Hotel');
+
 
 module.exports.hotelsGetAll = function(req, res) {
-    
-    var db = dbconn.get();
-    //get collection 
-    var collection =db.collection('hotels');
+//Native Driver  
+//    var db = dbconn.get();
+//    //get collection 
+//    var collection =db.collection('hotels');
     
     var offset = 0;
     var count = 5;
@@ -26,47 +31,74 @@ module.exports.hotelsGetAll = function(req, res) {
                  //decimal based 10
                 count = parseInt(req.query.count,10);
             }
-    
-    //convert result to array json file so that we can view it on browser
-    collection
+    Hotel
         .find()
-        .skip(offset)      //how many document we need to skips, starting from 0
-        .limit(count)      //set number of document we need to return
-        .toArray(function(err,docs){
-            console.log("Found hotels", docs);
+        .skip(offset)
+        .limit(count)
+        .exec(function(err, hotels){
+            console.log('Found hotels', hotels.length);
             res
-                .status(200)
-                .json(docs);
+                .json(hotels);
         });
+    
+    
+    
+    
+    //Native Driver: 
+    //convert result to array json file so that we can view it on browser
+//    collection
+//        .find()
+//        .skip(offset)      //how many document we need to skips, starting from 0
+//        .limit(count)      //set number of document we need to return
+//        .toArray(function(err,docs){
+//            console.log("Found hotels", docs);
+//            res
+//                .status(200)
+//                .json(docs);
+//        });
 };
 
 //create controller for hotelId
 module.exports.hotelsGetOne = function(req, res) {
     
+    //Native
     //get collection 
-     var db = dbconn.get();
-     var collection =db.collection('hotels');
+//     var db = dbconn.get();
+//     var collection =db.collection('hotels');
     
     
     
     //we want localhost/data/hotels/hotelId
     var hotelId =req.params.hotelId;
     //create a variable to hold individual hotel
-    var thisHotel = hotelData[hotelId];
+    //Native
+   // var thisHotel = hotelData[hotelId];
    console.log("Get the hotel Id: " + hotelId);
     
-    collection
-      .findOne({
-    // in order to use ObjectId we need to include its driver as above ...ObjectId
-        _id: ObjectId(hotelId)
-        
-        },function(err, doc){
-        
-        res
-            .status(200)
-            .json(doc); //we get only one id we need 
-          
-      });
+    Hotel  
+        .findById(hotelId)
+        .exec(function(error,doc){
+            res
+                .status(200)
+                .json(doc);
+        });
+    
+    
+    
+    
+    //Native Driver
+//    collection
+//      .findOne({
+//    // in order to use ObjectId we need to include its driver as above ...ObjectId
+//        _id: ObjectId(hotelId)
+//        
+//        },function(err, doc){
+//        
+//        res
+//            .status(200)
+//            .json(doc); //we get only one id we need 
+//          
+//      });
     
     
 };
