@@ -1,3 +1,5 @@
+//mongoose db
+require('./api/data/db.js');
 //open connection to database
 require('./api/data/dbconnection.js').open();
 
