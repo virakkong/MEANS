@@ -12,6 +12,32 @@
 var mongoose = require('mongoose');
 var Hotel = mongoose.model('Hotel');
 
+var runGeoQuery = function(req,res){
+    //extract value of query and create GeoJson points-->calculate coordinate on the sphere
+    var lng = parseFloat(req.query.lng);
+    var lat = parseFloat(req.query.lat);
+    var point = {
+        type: 'Point',
+        coordinates: [lng,lat]
+    };
+    
+    var geoOptions = {
+        //serch on surface of sphere by true
+        spherical: true,
+        maxDistance: 2000,  //2000km
+        num: 5
+        
+    };
+    
+    Hotel   //points, geoOptions
+        .geoNear(point, geoOptions, function(err, results, stats) {
+            console.log("Geo Result: ",results);
+            console.log("Geo Stat: ", stats);
+            res  //show result on browser
+                .status(200)
+                .json(results);
+    }); 
+};
 
 module.exports.hotelsGetAll = function(req, res) {
 //Native Driver  
@@ -21,6 +47,12 @@ module.exports.hotelsGetAll = function(req, res) {
     
     var offset = 0;
     var count = 5;
+    
+    
+            if(req.query && req.query.lat && req.query.lng) {
+                runGeoQuery(req, res);
+                return;
+            }
             //check query properties are exists
             if(req.query && req.query.offset) {
                  //decimal based 10
