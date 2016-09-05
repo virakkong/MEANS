@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 var reviewSchema = new mongoose.Schema({
    name: {
        type: String,
