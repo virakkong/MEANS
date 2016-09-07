@@ -29,6 +29,14 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 //make sure the middle ware run between static and api
 //we want it run before api, aka route
 
+
+//allow web server to use node_modules
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+
+
+
+
+
 app.use(bodyParser.urlencoded({extended: false}));
 //set to false mean we need only string and array for our body for post form
 //set to true-->access all data type
