@@ -12,7 +12,8 @@ router
     .route('/hotels')   //localhost:8080/api/hotels
 
     //call controller to use
-    .get(CtrlHotels.hotelsGetAll);  //hotelsGetAll is a public method exported by module
+    .get(CtrlHotels.hotelsGetAll)  //hotelsGetAll is a public method exported by module
+    .post(CtrlHotels.hotelsAddOne);
 
 router
     //define parameter
@@ -20,13 +21,13 @@ router
     //Ex: http://localhost:8080/api/hotels/57c87f9dc31a70b8f8ea0394
 
     //call controller to use
-    .get(CtrlHotels.hotelsGetOne);  //add new controller
+    .get(CtrlHotels.hotelsGetOne)  //add new controller
+    //use put to update existing data, the entire file
+    //if want to update a specific field, we need to use patch
+    .put(CtrlHotels.hotelsUpdateOne)
+    .delete(CtrlHotels.hotelsDeleteOne);
 
-router 
-    .route('/hotels/new')  //localhost:8080/api/hotels/new/
 
-    //post
-    .post(CtrlHotels.hotelsAddOne);
 
 
 //#2: Review Route
@@ -35,13 +36,17 @@ router
     .route('/hotels/:hotelId/reviews')   
 
     //call controller to use
-    .get(CtrlReviews.reviewsGetAll);  
+    .get(CtrlReviews.reviewsGetAll)
+    .post(CtrlReviews.reviewsAddOne);
 
-router
+router 
     //define parameter
     .route('/hotels/:hotelId/reviews/:reviewId')   
 
     //call controller to use
-    .get(CtrlReviews.reviewsGetOne);  //add new controller
+    .get(CtrlReviews.reviewsGetOne)  //add new controller
+    .put(CtrlReviews.reviewsUpdateOne)
+    .delete(CtrlReviews.reviewsDeleteOne);
 
 module.exports = router;
+
