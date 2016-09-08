@@ -4,8 +4,9 @@ var express = require('express');
 var router = express.Router();  //localhost:8080/api/
 
 //set controllers
-var CtrlHotels = require('../controllers/hotels-controllers.js');
-var CtrlReviews =require('../controllers/reviews-controllers.js')
+var CtrlHotels = require('../controllers/hotels.controllers.js');
+var CtrlReviews =require('../controllers/reviews.controllers.js');
+var CtrlUsers = require('../controllers/users.controllers.js');
 
 //#1: Hotel Route
 router 
@@ -47,6 +48,19 @@ router
     .get(CtrlReviews.reviewsGetOne)  //add new controller
     .put(CtrlReviews.reviewsUpdateOne)
     .delete(CtrlReviews.reviewsDeleteOne);
+
+//Authentication
+router
+
+    .route('/users/register')
+    .post(CtrlUsers.register);
+
+router
+
+    .route('/users/login')
+    .post(CtrlUsers.login);
+
+
 
 module.exports = router;
 

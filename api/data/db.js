@@ -42,5 +42,6 @@ process.on('SIGTERM', function() {
   });
 });
 
-require('./hotels.model.js');
-
+// BRING IN YOUR SCHEMAS & MODELS
+require('./hotels.model');
+require('./users.model');
