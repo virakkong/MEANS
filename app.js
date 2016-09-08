@@ -37,10 +37,12 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 //set to false mean we need only string and array for our body for post form
 //set to true-->access all data type
 
+//make backend to understand Json data
+app.use(bodyParser.json());
 
 app.use('/api', routes); // /api will represents api/routes
 

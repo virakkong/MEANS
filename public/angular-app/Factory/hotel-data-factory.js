@@ -3,7 +3,8 @@ function hotelDataFactory($http){
     
     return {
         hotelList: hotelList,
-        hotelDisplay: hotelDisplay
+        hotelDisplay: hotelDisplay,
+        postReview: postReview
     };
     
     function hotelList() {
@@ -18,6 +19,9 @@ function hotelDataFactory($http){
     }
     function failed (error) {
         console.log(error.statusText);
+    }
+    function postReview(id,review) {
+        return $http.post('/api/hotels/' + id + '/reviews', review).then(complete).catch(failed);
     }
     
 }
